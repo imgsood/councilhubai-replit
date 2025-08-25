@@ -2,9 +2,13 @@ import { Twitter, Linkedin } from "lucide-react";
 
 export function Footer() {
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (sectionId === "") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   };
 
@@ -48,20 +52,13 @@ export function Footer() {
                   Features
                 </button>
               </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors" data-testid="footer-pricing">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors" data-testid="footer-security">
-                  Security
-                </a>
-              </li>
-              <li>
+              <li className="flex items-center space-x-2">
                 <a href="#" className="text-gray-300 hover:text-white transition-colors" data-testid="footer-integrations">
                   Integrations
                 </a>
+                <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                  Upcoming
+                </span>
               </li>
             </ul>
           </div>
@@ -69,31 +66,38 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors" data-testid="footer-about">
+                <button 
+                  onClick={() => scrollToSection("")}
+                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  data-testid="footer-about"
+                >
                   About
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors" data-testid="footer-careers">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors" data-testid="footer-privacy">
+                <button 
+                  onClick={() => scrollToSection("")}
+                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  data-testid="footer-privacy"
+                >
                   Privacy
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors" data-testid="footer-terms">
+                <button 
+                  onClick={() => scrollToSection("")}
+                  className="text-gray-300 hover:text-white transition-colors text-left"
+                  data-testid="footer-terms"
+                >
                   Terms
-                </a>
+                </button>
               </li>
             </ul>
           </div>
         </div>
         <div className="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-300 text-sm">
-            © 2024 CouncilHub AI. All rights reserved. Built for Australian Local Government.
+            © 2025 CouncilHub AI. All rights reserved. Built for Australian Local Government.
           </p>
           <p className="text-gray-300 text-sm mt-4 md:mt-0">
             🇦🇺 Proudly Australian
