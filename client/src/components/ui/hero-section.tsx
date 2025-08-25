@@ -33,9 +33,10 @@ export function HeroSection() {
               <Button 
                 onClick={() => scrollToSection("features")}
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg font-semibold"
+                className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg font-semibold bg-transparent"
                 size="lg"
                 data-testid="hero-learn-more"
+                style={{ color: 'white' }}
               >
                 Learn More
               </Button>
