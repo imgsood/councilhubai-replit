@@ -33,20 +33,6 @@ export function Navigation() {
                 Features
               </button>
               <button 
-                onClick={() => scrollToSection("how-it-works")}
-                className="text-neutral hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
-                data-testid="nav-how-it-works"
-              >
-                How It Works
-              </button>
-              <button 
-                onClick={() => scrollToSection("benefits")}
-                className="text-neutral hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
-                data-testid="nav-benefits"
-              >
-                Benefits
-              </button>
-              <button 
                 onClick={() => scrollToSection("contact")}
                 className="text-neutral hover:text-primary px-3 py-2 text-sm font-medium transition-colors"
                 data-testid="nav-contact"
@@ -88,20 +74,6 @@ export function Navigation() {
                 data-testid="mobile-nav-features"
               >
                 Features
-              </button>
-              <button 
-                onClick={() => scrollToSection("how-it-works")}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-neutral hover:text-primary transition-colors"
-                data-testid="mobile-nav-how-it-works"
-              >
-                How It Works
-              </button>
-              <button 
-                onClick={() => scrollToSection("benefits")}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-neutral hover:text-primary transition-colors"
-                data-testid="mobile-nav-benefits"
-              >
-                Benefits
               </button>
               <button 
                 onClick={() => scrollToSection("contact")}
