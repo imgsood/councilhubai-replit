@@ -23,7 +23,7 @@ export function HeroSection() {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button 
-                onClick={() => scrollToSection("subscribe")}
+                onClick={() => scrollToSection("contact")}
                 className="bg-white text-primary hover:bg-gray-50 px-8 py-4 text-lg font-semibold shadow-lg"
                 size="lg"
                 data-testid="hero-early-access"

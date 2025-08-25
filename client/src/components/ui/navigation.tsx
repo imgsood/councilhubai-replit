@@ -44,7 +44,7 @@ export function Navigation() {
           
           <div className="hidden md:block">
             <Button 
-              onClick={() => scrollToSection("subscribe")}
+              onClick={() => scrollToSection("contact")}
               className="bg-primary hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors"
               data-testid="nav-early-access"
             >
@@ -84,7 +84,7 @@ export function Navigation() {
               </button>
               <div className="px-3 py-2">
                 <Button 
-                  onClick={() => scrollToSection("subscribe")}
+                  onClick={() => scrollToSection("contact")}
                   className="w-full bg-primary hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors"
                   data-testid="mobile-nav-early-access"
                 >

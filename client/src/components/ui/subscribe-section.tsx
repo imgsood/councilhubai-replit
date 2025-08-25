@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 export function SubscribeSection() {
   const { toast } = useToast();
@@ -52,26 +53,56 @@ export function SubscribeSection() {
     subscriptionMutation.mutate(data);
   };
 
+  const contactInfo = [
+    {
+      icon: <Mail className="w-6 h-6 text-white" />,
+      title: "Email Us",
+      details: ["hello@councilhub.ai", "enterprise@councilhub.ai"]
+    },
+    {
+      icon: <Phone className="w-6 h-6 text-white" />,
+      title: "Call Us",
+      details: ["1800 COUNCIL (1800 268 624)", "Available Mon-Fri 9AM-5PM AEST"]
+    },
+    {
+      icon: <MapPin className="w-6 h-6 text-white" />,
+      title: "Visit Us",
+      details: ["Level 12, 123 Collins Street", "Melbourne VIC 3000, Australia"]
+    }
+  ];
+
   return (
-    <section id="subscribe" className="py-20 bg-primary">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+    <section id="contact" className="py-20 bg-primary">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Ready to Transform Your Council?
           </h2>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Join the waitlist for early access to CouncilHub AI. Be among the first councils to revolutionize resident services.
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            Schedule a personalized demo to see how CouncilHub AI can transform your council operations. Join the waitlist for early access.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <div>
-            <img 
-              src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400" 
-              alt="Contemporary Australian local government building showcasing modern civic architecture" 
-              className="rounded-xl shadow-2xl w-full h-auto" 
-            />
+            <h3 className="text-2xl font-bold text-white mb-8">Let's Discuss Your Council's Needs</h3>
+            <div className="space-y-8">
+              {contactInfo.map((contact, index) => (
+                <div key={index} className="flex items-start space-x-4" data-testid={`contact-info-${index}`}>
+                  <div className="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    {contact.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-2">{contact.title}</h4>
+                    {contact.details.map((detail, detailIndex) => (
+                      <p key={detailIndex} className="text-blue-100">{detail}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+          
           <div className="bg-white rounded-xl shadow-2xl p-8">
             <h3 className="text-2xl font-bold text-neutral mb-6">Get Early Access</h3>
             <Form {...form}>

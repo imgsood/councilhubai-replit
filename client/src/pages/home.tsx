@@ -2,7 +2,6 @@ import { Navigation } from "@/components/ui/navigation";
 import { HeroSection } from "@/components/ui/hero-section";
 import { FeaturesSection } from "@/components/ui/features-section";
 import { SubscribeSection } from "@/components/ui/subscribe-section";
-import { ContactSection } from "@/components/ui/contact-section";
 import { Footer } from "@/components/ui/footer";
 
 export default function Home() {
@@ -12,7 +11,6 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection />
       <SubscribeSection />
-      <ContactSection />
       <Footer />
     </div>
   );
