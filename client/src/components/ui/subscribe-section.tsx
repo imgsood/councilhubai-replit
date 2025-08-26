@@ -73,27 +73,8 @@ export function SubscribeSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-8">Let's Discuss Your Council's Needs</h3>
-            <div className="space-y-8">
-              {contactInfo.map((contact, index) => (
-                <div key={index} className="flex items-start space-x-4" data-testid={`contact-info-${index}`}>
-                  <div className="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                    {contact.icon}
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-white mb-2">{contact.title}</h4>
-                    {contact.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-blue-100">{detail}</p>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-xl shadow-2xl p-8">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-white rounded-xl shadow-2xl p-8 mb-8">
             <h3 className="text-2xl font-bold text-neutral mb-6">Get Early Access</h3>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -190,6 +171,25 @@ export function SubscribeSection() {
             <p className="text-sm text-gray-500 mt-4 text-center">
               We respect your privacy. Unsubscribe at any time.
             </p>
+          </div>
+          
+          <div className="text-center">
+            <h3 className="text-2xl font-bold text-white mb-6">Let's Discuss Your Council's Needs</h3>
+            <div className="flex justify-center">
+              {contactInfo.map((contact, index) => (
+                <div key={index} className="flex items-center space-x-4" data-testid={`contact-info-${index}`}>
+                  <div className="flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    {contact.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-white mb-1">{contact.title}</h4>
+                    {contact.details.map((detail, detailIndex) => (
+                      <p key={detailIndex} className="text-blue-100">{detail}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
