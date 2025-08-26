@@ -57,17 +57,7 @@ export function SubscribeSection() {
     {
       icon: <Mail className="w-6 h-6 text-white" />,
       title: "Email Us",
-      details: ["hello@councilhub.ai", "enterprise@councilhub.ai"]
-    },
-    {
-      icon: <Phone className="w-6 h-6 text-white" />,
-      title: "Call Us",
-      details: ["1800 COUNCIL (1800 268 624)", "Available Mon-Fri 9AM-5PM AEST"]
-    },
-    {
-      icon: <MapPin className="w-6 h-6 text-white" />,
-      title: "Visit Us",
-      details: ["Level 12, 123 Collins Street", "Melbourne VIC 3000, Australia"]
+      details: ["hello@councilhub.ai"]
     }
   ];
 
