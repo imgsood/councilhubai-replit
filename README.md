@@ -88,12 +88,22 @@ EXPOSE 5000
 CMD ["npm", "start"]
 ```
 
-#### Netlify/Static Hosting
-For static deployment, build the frontend only:
+#### Netlify
+The project includes a `netlify.toml` configuration file. Simply:
+
+1. Connect your repository to Netlify
+2. Netlify will automatically detect the configuration
+3. Deploy!
+
+**Manual Configuration (if needed):**
+- Build command: `npm install && npm run build`
+- Publish directory: `dist/public`
+
+#### Other Static Hosting
+For other static hosts, build and deploy the `dist/public` folder:
 ```bash
-cd client
 npm run build
-# Deploy the dist folder
+# Deploy the dist/public folder
 ```
 
 ## Project Structure
