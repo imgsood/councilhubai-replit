@@ -1,19 +1,16 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertSubscriptionSchema, type InsertSubscription } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail } from "lucide-react";
 
 export function SubscribeSection() {
   const { toast } = useToast();
-  const queryClient = useQueryClient();
 
   const form = useForm<InsertSubscription>({
     resolver: zodResolver(insertSubscriptionSchema),
@@ -25,32 +22,55 @@ export function SubscribeSection() {
     },
   });
 
-  const subscriptionMutation = useMutation({
-    mutationFn: async (data: InsertSubscription) => {
-      const response = await apiRequest("POST", "/api/subscriptions", data);
-      return response.json();
-    },
-    onSuccess: (data) => {
-      toast({
-        title: "Success!",
-        description: data.message,
-        variant: "default",
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Helper function to encode form data for Netlify
+  const encode = (data: Record<string, string>) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
+
+  const onSubmit = async (data: InsertSubscription) => {
+    setIsSubmitting(true);
+    
+    try {
+      // Prepare form data for Netlify
+      const formData = {
+        "form-name": "council-early-access",
+        "council-name": data.councilName,
+        "contact-name": data.contactName,
+        "email": data.email,
+        "position": data.position,
+      };
+
+      // Submit to Netlify
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode(formData),
       });
-      form.reset();
-      queryClient.invalidateQueries({ queryKey: ["/api/subscriptions"] });
-    },
-    onError: (error) => {
+
+      if (response.ok) {
+        toast({
+          title: "Success!",
+          description: "Thank you for joining our early access program! We'll be in touch soon.",
+          variant: "default",
+        });
+        form.reset();
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
       toast({
         title: "Error",
         description: "Failed to submit subscription. Please try again.",
         variant: "destructive",
       });
-      console.error("Subscription error:", error);
-    },
-  });
-
-  const onSubmit = (data: InsertSubscription) => {
-    subscriptionMutation.mutate(data);
+      console.error("Submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -77,7 +97,16 @@ export function SubscribeSection() {
           <div className="bg-white rounded-xl shadow-2xl p-8 mb-8">
             <h3 className="text-2xl font-bold text-neutral mb-6">Get Early Access</h3>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <form 
+                name="council-early-access"
+                method="POST"
+                data-netlify="true"
+                onSubmit={form.handleSubmit(onSubmit)} 
+                className="space-y-4"
+              >
+                {/* Hidden field for Netlify form detection */}
+                <input type="hidden" name="form-name" value="council-early-access" />
+                
                 <FormField
                   control={form.control}
                   name="councilName"
@@ -139,7 +168,7 @@ export function SubscribeSection() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium text-neutral">Position/Role</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select name="position" onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger data-testid="select-position">
                             <SelectValue placeholder="Select your role" />
@@ -161,10 +190,10 @@ export function SubscribeSection() {
                 <Button 
                   type="submit"
                   className="w-full bg-primary hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors shadow-lg"
-                  disabled={subscriptionMutation.isPending}
+                  disabled={isSubmitting}
                   data-testid="button-submit-subscription"
                 >
-                  {subscriptionMutation.isPending ? "Submitting..." : "Join Early Access Program"}
+                  {isSubmitting ? "Submitting..." : "Join Early Access Program"}
                 </Button>
               </form>
             </Form>

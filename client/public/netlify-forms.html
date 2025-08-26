@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Netlify Forms Detection</title>
+</head>
+<body>
+    <!-- This hidden form helps Netlify detect your form during build time -->
+    <form name="council-early-access" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="council-name" />
+        <input type="text" name="contact-name" />
+        <input type="email" name="email" />
+        <select name="position">
+            <option value="mayor">Mayor</option>
+            <option value="ceo">CEO/General Manager</option>
+            <option value="it-manager">IT Manager</option>
+            <option value="customer-service">Customer Service Manager</option>
+            <option value="other">Other</option>
+        </select>
+    </form>
+</body>
+</html>
